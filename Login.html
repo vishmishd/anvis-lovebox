@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Anvi’s LoveBox 💌</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fff0f5;
+      color: #6a2c91;
+    }
+    .login-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(107, 54, 146, 0.3);
+      text-align: center;
+      width: 320px;
+      position: relative;
+    }
+    h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #9c27b0;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px 40px 12px 12px; /* right padding for icon */
+      margin: 15px 0;
+      border-radius: 10px;
+      border: 2px solid #d1a0f7;
+      font-size: 16px;
+      outline-color: #b367f0;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      position: relative;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: #9c27b0;
+    }
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 20px;
+      color: #9c27b0;
+      user-select: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #b367f0;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(179, 103, 240, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #8b23c3;
+    }
+    .error {
+      color: #e91e63;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+    .love-emoji {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="love-emoji">💖</div>
+    <h2>Welcome to Anvi’s LoveBox</h2>
+    <input type="text" id="username" placeholder="Username" autocomplete="off" />
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Password" autocomplete="off" />
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    </div>
+    <button onclick="login()">Login</button>
+    <div class="error" id="error-msg">Oops! Wrong username or password 💔</div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      if(user === 'mishti_dubey' && pass === '24/02/22') {
+        window.location.href = "anvi's-lovebox.html";
+      } else {
+        const error = document.getElementById('error-msg');
+        error.style.display = 'block';
+      }
+    }
+
+    function togglePassword() {
+      const passInput = document.getElementById('password');
+      const toggleIcon = document.querySelector('.toggle-password');
+      if (passInput.type === "password") {
+        passInput.type = "text";
+        toggleIcon.textContent = "🙈";
+      } else {
+        passInput.type = "password";
+        toggleIcon.textContent = "👁️";
+      }
+    }
+  </script>
+</body>
+</html>
