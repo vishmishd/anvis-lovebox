@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anvi’s LoveBox 💌</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fff0f5;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #cba8f5;
+      padding: 15px 20px;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .header-left img {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+    }
+
+    .header-title {
+      flex-grow: 1;
+      text-align: center;
+      margin-right: 50px;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .menu a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .menu a:hover {
+      background-color: #eee;
+    }
+
+    .content {
+      flex: 1;
+      position: relative;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      margin: 80px auto 50px;
+    }
+
+    select, textarea, input[type="file"], button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* --- CALENDAR --- */
+    .calendar-toggle {
+      position: fixed;
+      top: 110px;
+      left: 20px;
+      text-align: center;
+      z-index: 99;
+    }
+
+    .calendar-toggle .circle-btn {
+      background: #ff69b4;
+      border: none;
+      color: white;
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .calendar-popup {
+      background: white;
+      border: 2px solid #cba8f5;
+      border-radius: 15px;
+      padding: 10px;
+      width: 220px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .calendar-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .calendar-nav .circle-btn {
+      background: #ff69b4;
+      border: none;
+      color: white;
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    #date-display {
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    #memory-text {
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #f5d0f5;
+      padding: 15px;
+      color: #333;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <img src="logo.png" alt="Logo">
+    </div>
+    <div class="header-title"><strong>ANVI’S LOVEBOX 💌</strong></div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="anvi's-lovebox.html">Home</a>
+      <a href="about-us.html">About Us</a>
+      <a href="messages.html">Messages</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </header>
+
+  <div class="calendar-toggle">
+    <button onclick="toggleCalendar()" class="circle-btn">📅</button>
+    <div class="calendar-popup" id="calendar-popup">
+      <div class="calendar-nav">
+        <button class="circle-btn" onclick="changeDate(-1)">❮</button>
+        <span id="date-display">Jun 14</span>
+        <button class="circle-btn" onclick="changeDate(1)">❯</button>
+      </div>
+      <div id="memory-text">Loading...</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <form action="https://formspree.io/f/xqabeqrn" method="POST" onsubmit="showThankYou(event)">
+      <select required>
+        <option value="">Message Type 💭</option>
+        <option>Query 💭</option>
+        <option>Suggestion 💡</option>
+        <option>Feedback 📢</option>
+        <option>Complaint 😤</option>
+        <option>Just Love 🥰</option>
+      </select>
+      <textarea name="message" placeholder="Write your message here..." rows="5" required></textarea>
+      <input type="file" name="attachment">
+      <button type="submit">Send 💌</button>
+    </form>
+
+    <div id="thankyou" style="display:none; margin: 30px; font-size: 18px; font-family: 'Comic Sans MS', cursive;">
+      <p>Thank you, my love! 💖<br>
+      Your message has reached straight to my heart.<br><br>
+      I’ll read it with a big smile.<br><br>
+      Wanna send more? Just refresh the page and pour your heart out again 💌</p>
+    </div>
+  </div>
+
+  <footer>
+    Block A, 24/2, Anvipuram, Chomi Town, 88876
+  </footer>
+
+  <script>
+    const memories = {
+      "2022-02-03": "She added me on Snap 💫",
+      "2022-02-24": "We talked to each other for the first time 🎉",
+      "2022-04-17": "We exchanged our contact numbers ☎️",
+      "2022-04-27": "We paired our bitmojis 👫",
+      "2022-09-14": "I heard her voice for the first time 🎧",
+      "2022-11-29": "Usne pehli Spotify playlist bheji 🎶",
+      "2023-02-24": "1 saal pura hua aur relationship mein aa gye hum 💕",
+      "2023-03-23": "100 days ki streak puri ho gyi snap pr 🔥",
+      "2024-09-22": "We met first time IRL 💑",
+      "2025-01-05": "We tried to meet but we couldn't 💔",
+      "2025-05-31": "We met second time IRL ❤️"
+    };
+
+    const quotes = [
+      "You're my today and all of my tomorrows 💘",
+      "Every love story is beautiful, but ours is my favorite 💖",
+      "Forever is not long enough with you 💞",
+      "Your love is my favorite memory 💌",
+      "With you, every moment is a memory 💫"
+    ];
+
+    let currentDate = new Date();
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function toggleCalendar() {
+      const popup = document.getElementById("calendar-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    function formatDate(date) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return `${months[date.getMonth()]} ${date.getDate()}`;
+    }
+
+    function formatKey(date) {
+      return date.toISOString().split('T')[0];
+    }
+
+    function updateCalendar() {
+      const display = document.getElementById("date-display");
+      const memoryText = document.getElementById("memory-text");
+      const key = formatKey(currentDate);
+      display.textContent = formatDate(currentDate);
+      memoryText.textContent = memories[key] || quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    function changeDate(direction) {
+      currentDate.setDate(currentDate.getDate() + direction);
+      updateCalendar();
+    }
+
+    function showThankYou(e) {
+      e.preventDefault();
+      document.querySelector('form').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+      const form = e.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+    }
+
+    updateCalendar();
+  </script>
+
+</body>
+</html>
